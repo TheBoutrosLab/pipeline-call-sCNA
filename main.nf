@@ -4,7 +4,7 @@ nextflow.enable.dsl=2
 
 include { run_validate_PipeVal } from './external/pipeline-Nextflow-module/modules/PipeVal/validate/main.nf'
 include { indexFile } from './external/pipeline-Nextflow-module/modules/common/indexFile/main.nf'
-include { cnv_facets } from './module/workflow-cnv_facets.nf'
+include { workflow_cnv_facets } from './module/workflow-cnv_facets.nf'
 
 log.info """\
 =====================================
@@ -118,7 +118,7 @@ workflow {
     *   Call somatic copy-number variants with CNV_FACETS
     */
     if ('cnv_facets' in params.algorithm) {
-        cnv_facets(
+        workflow_cnv_facets(
             cnv_facets_meta,
             input_ch_paired_bams,
             input_ch_dbSNP_file
