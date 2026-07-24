@@ -4,6 +4,7 @@ nextflow.enable.dsl=2
 
 include { run_validate_PipeVal } from './external/pipeline-Nextflow-module/modules/PipeVal/validate/main.nf'
 include { indexFile } from './external/pipeline-Nextflow-module/modules/common/indexFile/main.nf'
+include { cnv_facets } from './module/workflow-cnv_facets.nf'
 
 log.info """\
 =====================================
@@ -24,7 +25,7 @@ Current Configuration:
         algorithms: ${params.algorithm}
         sample_sex: "${params.sample_sex}"
         battenberg_reference: "${params.battenberg_reference}"
-        dnSNP_file: "${params.dbSNP_file}"
+        dbSNP_file: "${params.dbSNP_file}"
         reference_dict: "${params.reference_dict}"
         position_scale: "${params.position_scale}"
 
@@ -60,18 +61,43 @@ workflow {
         .set{ input_ch_samples_with_index }
 
     input_ch_samples_with_index
+        .filter{ sample -> sample.sample_type == 'tumor' }
+        .map{ sample -> [sample.id, sample.path, sample.index] }
+        .set{ input_ch_tumor }
+
+    input_ch_samples_with_index
+        .filter{ sample -> sample.sample_type == 'normal' }
+        .map{ sample -> [sample.id, sample.path, sample.index] }
+        .set{ input_ch_normal }
+
+    input_ch_tumor
+        .combine(input_ch_normal)
+        .set{ input_ch_paired_bams }
+
+    Channel.fromPath(params.dbSNP_file, checkIfExists: true)
+        .map{ dbSNP_file -> [dbSNP_file, indexFile(dbSNP_file)] }
+        .set{ input_ch_dbSNP_file }
+
+    input_ch_samples_with_index
         .map{ sample -> [sample.path, sample.index] }
         .flatten()
+        .mix(input_ch_dbSNP_file.flatten())
         .set{ input_ch_validate }
 
     base_meta = Channel.value([
-        'log_output_dir': params.log_output_dir,
+        'log_output_dir': "${params.log_output_dir}/process-log",
         'output_dir': params.output_dir_base
     ])
 
     module_meta = base_meta.map{ base_m ->
         base_m + [
-            'log_output_dir': "${base_m.log_output_dir}/process-log"
+            'docker_image': params.docker_image_validate
+        ]
+    }
+
+    cnv_facets_meta = base_meta.map{ base_m ->
+        base_m + [
+            'workflow_output_dir': "${base_m.output_dir}/CNV_FACETS-${params.cnv_facets_version}"
         ]
     }
 
@@ -87,4 +113,15 @@ workflow {
             name: 'input_validation.txt',
             storeDir: "${params.output_dir_base}/validation"
         )
+
+    /**
+    *   Call somatic copy-number variants with CNV_FACETS
+    */
+    if ('cnv_facets' in params.algorithm) {
+        cnv_facets(
+            cnv_facets_meta,
+            input_ch_paired_bams,
+            input_ch_dbSNP_file
+        )
+    }
 }
