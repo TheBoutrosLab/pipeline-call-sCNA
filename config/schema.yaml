@@ -32,10 +32,10 @@ algorithm:
   required: true
   help: 'List of available somatic CNA callers'
   default:
-    - battenberg
+    - Battenberg
     - cnv_facets
   choices:
-    - battenberg
+    - Battenberg
     - cnv_facets
 position_scale:
   type: 'String'
