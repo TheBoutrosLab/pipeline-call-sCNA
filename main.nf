@@ -2,116 +2,89 @@
 
 nextflow.enable.dsl=2
 
-// Include processes and workflows here
 include { run_validate_PipeVal } from './external/pipeline-Nextflow-module/modules/PipeVal/validate/main.nf'
-
-include { generate_standard_filename } from './external/pipeline-Nextflow-module/modules/common/generate_standardized_filename/main.nf'
 include { indexFile } from './external/pipeline-Nextflow-module/modules/common/indexFile/main.nf'
 
-// Add this pipeline's custom modules here
-include { run_command_Tool } from './module/EXAMPLE_checksum.nf'
-
-// include { tool_name_command_name } from './module/module-name'
-
-// Log info here
 log.info """\
-        ======================================
-        T E M P L A T E - N F  P I P E L I N E
-        ======================================
-        Boutros Lab
+=====================================
+C A L L - S C N A  P I P E L I N E
+=====================================
+Boutros Lab
 
-        Current Configuration:
-        - pipeline:
-            name: ${workflow.manifest.name}
-            version: ${workflow.manifest.version}
+Current Configuration:
 
-        - input:
-            input a: ${params.variable_name}
-            ...
+    - pipeline:
+        name: ${workflow.manifest.name}
+        version: ${workflow.manifest.version}
 
-        - output:
-            output a: ${params.output_path}
-            ...
+    - input:
+        samples: ${params.samples_to_process}
+        genome build: ${params.genome_build}
+        target regions: ${params.target_bed}
+        algorithms: ${params.algorithm}
+        sample_sex: "${params.sample_sex}"
+        battenberg_reference: "${params.battenberg_reference}"
+        dnSNP_file: "${params.dbSNP_file}"
+        reference_dict: "${params.reference_dict}"
+        position_scale: "${params.position_scale}"
 
-        - options:
-            option a: ${params.option_name}
-            ...
+    - output:
+        output_dir_base: ${params.output_dir_base}
+        output: ${params.output_dir}
+        log_output_dir: ${params.log_output_dir}
 
-        Tools Used:
-            tool a: ${params.docker_image_name}
+    - options:
+        save_intermediate_files: ${params.save_intermediate_files}
 
-        ------------------------------------
-        Starting workflow...
-        ------------------------------------
-        """
-        .stripIndent()
+    Tools Used:
+        tool Battenberg: ${params.docker_image_battenberg}
+        tool cnv_facets: ${params.docker_image_cnv_facets}
+        tool BoutrosLabPlottingGeneral: ${params.docker_image_bpg}
+        tool PipeVal: ${params.docker_image_validate}
+        tool SigProfilerExtractor: ${params.docker_image_sigprofilerextractor}
 
-// Establish input channels here
-Channel
-    .fromList(params.samples_to_process)
-    .map { sample ->
-        return tuple(sample.id, sample.path, sample.sample_type)
-    }
-    .set { samplesToProcessChannel }
+    All parameters:
+        ${params}
 
-Channel
-    .fromList(params.samples_to_process)
-    .map{ it -> [it['path'], indexFile(it['path'])] }
-    .flatten()
-    .set { files_to_validate_ch }
+------------------------------------
+Starting workflow...
+------------------------------------
+"""
 
-// These are a few potential channels that can be mixed in
-
-/*
-Channel
-    .from(
-        params.reference,
-        params.reference_index,
-        params.reference_dict
-        )
-    .set { reference_ch }
-
-// Decription of input channel
-Channel
-    .fromPath(params.variable_name)
-    .ifEmpty { error "Cannot find: ${params.variable_name}" }
-    .set { input_ch_variable_name }
-
-files_to_validate_ch = files_to_validate_ch
-    .mix(reference_ch)
-    .mix(input_ch_variable_name)
-*/
-
-// Main workflow here
 workflow {
+    /**
+    *   Input channel processing
+    */
+    Channel.from(params.samples_to_process)
+        .map{ sample -> ['index': indexFile(sample.path)] + sample }
+        .set{ input_ch_samples_with_index }
 
+    input_ch_samples_with_index
+        .map{ sample -> [sample.path, sample.index] }
+        .flatten()
+        .set{ input_ch_validate }
 
     base_meta = Channel.value([
         'log_output_dir': params.log_output_dir,
         'output_dir': params.output_dir_base
     ])
 
-    // Validate input files
-    run_validate_PipeVal(
-        base_meta.combine(files_to_validate_ch)
-        )
+    module_meta = base_meta.map{ base_m ->
+        base_m + [
+            'log_output_dir': "${base_m.log_output_dir}/process-log"
+        ]
+    }
 
-    // Capture validation results
+    /**
+    *   Input validation
+    */
+    run_validate_PipeVal(
+        module_meta.combine(input_ch_validate)
+    )
+
     run_validate_PipeVal.out.validation_result
         .collectFile(
-            name: 'input_validation.txt', newLine: true,
+            name: 'input_validation.txt',
             storeDir: "${params.output_dir_base}/validation"
         )
-
-    // Add pipeline-specific workflow steps here
-    run_command_Tool(
-        run_validate_PipeVal.out.validated_file
-        )
-
-    /*
-    tool_name_command_name(
-        samplesToProcessChannel,
-        input_ch_variable_name
-        )
-    */
 }
