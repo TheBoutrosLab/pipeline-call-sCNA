@@ -74,14 +74,14 @@ workflow {
         .combine(input_ch_normal)
         .set{ input_ch_paired_bams }
 
-    Channel.fromPath(params.dbSNP_file, checkIfExists: true)
-        .map{ dbSNP_file -> [dbSNP_file, indexFile(dbSNP_file)] }
-        .set{ input_ch_dbSNP_file }
+    // Channel.fromPath(params.dbSNP_file, checkIfExists: true)
+    //     .map{ dbSNP_file -> [dbSNP_file, indexFile(dbSNP_file.toString())] }
+    //     .set{ input_ch_dbSNP_file }
 
     input_ch_samples_with_index
         .map{ sample -> [sample.path, sample.index] }
         .flatten()
-        .mix(input_ch_dbSNP_file.flatten())
+        // .mix(input_ch_dbSNP_file.flatten())
         .set{ input_ch_validate }
 
     base_meta = Channel.value([
