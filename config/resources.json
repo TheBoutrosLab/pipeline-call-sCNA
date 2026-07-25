@@ -1,6 +1,6 @@
 {
     "f2": {
-        "run_validate_PipeVal": {
+        "run_validate_PipeVal|generate_sha512_cnv_facets": {
             "cpus": {
                 "min": 1,
                 "fraction": 0.5,
@@ -122,7 +122,7 @@
         }
     },
     "f16": {
-        "run_validate_PipeVal": {
+        "run_validate_PipeVal|generate_sha512_cnv_facets": {
             "cpus": {
                 "min": 1,
                 "fraction": 0.06,
@@ -232,7 +232,7 @@
         }
     },
     "f32": {
-        "run_validate_PipeVal": {
+        "run_validate_PipeVal|generate_sha512_cnv_facets": {
             "cpus": {
                 "min": 1,
                 "fraction": 0.03,
@@ -342,7 +342,7 @@
         }
     },
     "f72": {
-        "run_validate_PipeVal": {
+        "run_validate_PipeVal|generate_sha512_cnv_facets": {
             "cpus": {
                 "min": 1,
                 "fraction": 0.01,
@@ -464,7 +464,7 @@
         }
     },
     "m64": {
-        "run_validate_PipeVal": {
+        "run_validate_PipeVal|generate_sha512_cnv_facets": {
             "cpus": {
                 "min": 1,
                 "fraction": 0.02,
@@ -586,7 +586,7 @@
         }
     },
     "default": {
-        "run_validate_PipeVal": {
+        "run_validate_PipeVal|generate_sha512_cnv_facets": {
             "cpus": {
                 "min": 1,
                 "fraction": 0.01,
