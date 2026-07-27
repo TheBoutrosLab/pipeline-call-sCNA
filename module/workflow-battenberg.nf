@@ -4,6 +4,7 @@ include { call_SubclonalCopyNumber_Battenberg } from "./call_SubclonalCopyNumber
 include { suggest_refit_Battenberg } from "./suggest_refit_Battenberg"
 include { workflow_plot_BAFLogR } from "./workflow-plot-BPG"
 include { prepare_CNASignaturesInput_Battenberg } from "./prepare_CNASignaturesInput_Battenberg"
+include { extract_CNASignatures_SigProfilerExtractor } from "./extract_CNASignatures_SigProfilerExtractor"
 include { generate_checksum_PipeVal as generate_sha512_Battenberg } from "../external/pipeline-Nextflow-module/modules/PipeVal/generate-checksum/main.nf"
 
 workflow workflow_battenberg {
@@ -44,6 +45,14 @@ workflow workflow_battenberg {
         META,
         params.sample,
         call_SubclonalCopyNumber_Battenberg.out.subclones_cna,
+        input_ch_script
+    )
+
+    extract_CNASignatures_SigProfilerExtractor(
+        META,
+        params.sample,
+        "BATTENBERG",
+        prepare_CNASignaturesInput_Battenberg.out.battenberg_signature_input,
         input_ch_script
     )
 
