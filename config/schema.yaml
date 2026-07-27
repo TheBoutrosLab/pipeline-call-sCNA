@@ -49,7 +49,7 @@ battenberg_reference:
   type: 'Path'
   mode: 'r'
   required: true
-  help: 'Absolute path to a reference dbSNP file'
+  help: 'Absolute path to the Battenberg reference directory'
 min_rho:
   type: 'Number'
   required: true
