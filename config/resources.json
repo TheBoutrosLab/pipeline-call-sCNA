@@ -102,7 +102,7 @@
                 }
             }
         },
-        "run_SigProfilerExtractor": {
+        "extract_CNASignatures_SigProfilerExtractor": {
             "cpus": {
                 "min": 1,
                 "fraction": 0.5,
@@ -212,7 +212,7 @@
                 }
             }
         },
-        "run_SigProfilerExtractor": {
+        "extract_CNASignatures_SigProfilerExtractor": {
             "cpus": {
                 "min": 1,
                 "fraction": 0.06,
@@ -322,7 +322,7 @@
                 }
             }
         },
-        "run_SigProfilerExtractor": {
+        "extract_CNASignatures_SigProfilerExtractor": {
             "cpus": {
                 "min": 1,
                 "fraction": 0.03,
@@ -444,7 +444,7 @@
                 }
             }
         },
-        "run_SigProfilerExtractor": {
+        "extract_CNASignatures_SigProfilerExtractor": {
             "cpus": {
                 "min": 1,
                 "fraction": 0.01,
@@ -566,7 +566,7 @@
                 }
             }
         },
-        "run_SigProfilerExtractor": {
+        "extract_CNASignatures_SigProfilerExtractor": {
             "cpus": {
                 "min": 1,
                 "fraction": 0.02,
@@ -688,7 +688,7 @@
                 }
             }
         },
-        "run_SigProfilerExtractor": {
+        "extract_CNASignatures_SigProfilerExtractor": {
             "cpus": {
                 "min": 1,
                 "fraction": 0.01,
