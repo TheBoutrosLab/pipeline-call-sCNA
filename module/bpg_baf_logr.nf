@@ -55,9 +55,6 @@ process plot_BAFLogR_BPG {
     if ( per_chrom_mode == "disabled" ) {
         per_chrom_mode_arg = ""
         position_scale_arg = "-p ${position_scale}"
-        if ( position_scale == "index" ) {
-            reference_dict_arg = ""
-        }
     }
 
     """
