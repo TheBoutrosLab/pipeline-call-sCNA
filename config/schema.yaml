@@ -1,0 +1,323 @@
+---
+dataset_id:
+  type: 'String'
+  required: true
+  help: 'Dataset identifier'
+patient_id:
+  type: 'String'
+  required: true
+  help: 'Patient identifier'
+sample_sex:
+  type: 'String'
+  required: true
+  help: 'Sex of the sample, either male or female'
+  choices:
+    - male
+    - female
+genome_build:
+  type: 'String'
+  required: true
+  help: 'Reference Genome build'
+  default: GRCh38
+  choices:
+    - GRCh37
+    - GRCh38
+target_bed:
+  type: 'Path'
+  mode: 'r'
+  required: false
+  help: 'Absolute path to target regions BED file'
+algorithm:
+  type: 'List'
+  required: true
+  help: 'List of available somatic CNA callers'
+  default:
+    - Battenberg
+    - cnv_facets
+  choices:
+    - Battenberg
+    - cnv_facets
+position_scale:
+  type: 'String'
+  required: true
+  help: 'allele position scale for plotting'
+  default: genome-position
+  choices:
+    - index
+    - genome-position
+battenberg_reference:
+  type: 'Path'
+  mode: 'r'
+  required: true
+  help: 'Absolute path to the Battenberg reference directory'
+min_rho:
+  type: 'Number'
+  required: true
+  help: 'Minimum tumor purity (rho) threshold for a CNA segment'
+max_rho:
+  type: 'Number'
+  required: true
+  help: 'Maximum tumor purity (rho) threshold for a CNA segment'
+min_psi:
+  type: 'Number'
+  required: true
+  help: 'Minimum tumor ploidy (psi) threshold for a CNA segment'
+max_psi:
+  type: 'Number'
+  required: true
+  help: 'Max tumor ploidy (psi) threshold for a CNA segment'
+min_goodness_of_fit:
+  type: 'Number'
+  required: true
+  help: 'Minimum goodness of fit required for a purity/ploidy combination to be accepted as a solution'
+balanced_threshold:
+  type: 'Number'
+  required: true
+  help: 'The threshold beyond which BAF becomes uninformative'
+min_normal_depth:
+  type: 'Integer'
+  required: true
+  help: 'Minimum depth required in the matched normal for a SNP to be considered as part of the wgs analysis'
+min_base_qual:
+  type: 'Integer'
+  required: true
+  help: 'Minimum base quality required for a read to be counted when allele counting'
+min_map_qual:
+  type: 'Integer'
+  required: true
+  help: 'Minimum mapping quality required for a read to be counted when allele counting'
+dbSNP_file:
+  type: 'Path'
+  mode: 'r'
+  required: true
+  help: 'Absolute path to a reference dbSNP file'
+snp_mapq:
+  type: 'Integer'
+  required: true
+  default: 1
+  help: 'Minimum threshold for mapping quality'
+snp_baq:
+  type: 'Integer'
+  required: true
+  default: 30
+  help: 'Minimum threshold for base quality'
+depth:
+  type: 'NumberPairList'
+  required: true
+  default: [25, 2500]
+  help: 'Min and Max depth in normal sample for a position to be considered'
+cval:
+  type: 'NumberPairList'
+  required: true
+  default: [25, 400]
+  help: 'Min and Max critical value for segmentation in pre-processing and processing'
+nbhdsnp:
+  type: 'Integer'
+  required: true
+  default: 250
+  help: 'Interval size to reduce the SNP serial correlation. Should be similar to the median insert size of the libraries'
+rnd_seed:
+  type: 'Integer'
+  required: true
+  default: 0
+  help: 'Seed for random number generator'
+no_cov_plot:
+  type: 'Bool'
+  required: true
+  default: true
+  help: 'Set to `true` to NOT produce coverage plots while running `cnv_facets`'
+snp_count_orphans:
+  type: 'Bool'
+  required: true
+  default: true
+  help: 'Set to `true` to NOT discard anomalous read pairs while running `cnv_facets`'
+reference_dict:
+  type: 'Path'
+  mode: 'r'
+  required: true
+  help: 'Absolute path to the reference genome dictionary file'
+context_type:
+  type: 'String'
+  required: true
+  help: 'Mutation Context type for signature extraction. The "default" setting includes the following signatures: "SBS96,DBS78,ID83"'
+  default: default
+exome:
+  type: 'Bool'
+  required: true
+  help: 'Enable exome mode'
+  default: false
+min_max_signatures:
+  type: 'NumberPairList'
+  required: true
+  help: 'Minimum and Maximum number of signatures to be extracted'
+  default: [1, 25]
+nmf_replicates:
+  type: 'Integer'
+  required: true
+  help: 'Number iteration to be performed to extract each number signature'
+  default: 100
+resample:
+  type: 'Bool'
+  required: true
+  help: 'Add poisson noise to samples by resampling'
+  default: true
+seeds:
+  type: 'String'
+  required: true
+  help: 'Ensures reproducible NMF replicate resamples'
+  default: random
+matrix_normalization:
+  type: 'String'
+  required: true
+  help: 'Method of normalizing the genome matrix before it is analyzed by NMF'
+  default: gmm
+  choices:
+    - gmm
+    - log2
+    - custom
+    - none
+nmf_init:
+  type: 'String'
+  required: true
+  help: 'The initialization algorithm for W and H matrix of NMF'
+  default: random
+  choices:
+    - random
+    - nndsvd
+    - nndsvda
+    - nndsvdar
+    - nndsvd_min
+precision:
+  type: 'String'
+  required: true
+  help: 'Values should be single or double'
+  default: single
+  choices:
+    - single
+    - double
+min_max_nmf_iterations:
+  type: 'NumberPairList'
+  required: true
+  help: 'Value defines the minimum and maximum number of iterations to be completed before NMF converges'
+  default: [10000, 1000000]
+nmf_test_cov:
+  type: 'Integer'
+  required: true
+  help: 'Value defines the number number of iterations to done between checking next convergence'
+  default: 10000
+nmf_tolerance:
+  type: 'Number'
+  required: true
+  help: 'Value defines the tolerance to achieve to converge'
+  default: 1e-15
+gpu:
+  type: 'Bool'
+  required: true
+  help: 'Defines if the GPU resource will used if available'
+  default: false
+batch_size:
+  type: 'Integer'
+  required: true
+  help: 'Defines the number of NMF replicates to be performed by each CPU during the parallel processing'
+  default: 1
+stability:
+  type: 'Number'
+  required: true
+  help: 'The cutoff thresh-hold of the average stability. Solutions with average stabilities below this thresh-hold will not be considered.'
+  default: 0.8
+min_stability:
+  type: 'Number'
+  required: true
+  help: 'The cutoff thresh-hold of the minimum stability. Solutions with minimum stabilities below this thresh-hold will not be considered.'
+  default: 0.2
+combined_stability:
+  type: 'Number'
+  required: true
+  help: 'The cutoff thresh-hold of the combined stability (sum of average and minimum stability). Solutions with combined stabilities below this thresh-hold will not be considered.'
+  default: 1.0
+allow_stability_drop:
+  type: 'Bool'
+  required: true
+  help: 'Defines if solutions with a drop in stability with respect to the highest stable number of signatures will be considered'
+  default: false
+cosmic_version:
+  type: 'Number'
+  required: true
+  help: 'Defines the version of the COSMIC reference signatures'
+  default: 3.4
+make_decomposition_plots:
+  type: 'Bool'
+  required: true
+  help: 'Generate de novo to COSMIC signature decomposition plots as part of the results'
+  default: true
+collapse_to_SBS96:
+  type: 'Bool'
+  required: true
+  help: 'If True, SBS288 and SBS1536 de novo signatures will be mapped to SBS96 reference signatures. If False, those will be mapped to reference signatures of the same context.'
+  default: true
+get_all_signature_matrices:
+  type: 'Bool'
+  required: true
+  help: 'Write to output Ws and Hs from all the NMF iterations'
+  default: false
+export_probabilities:
+  type: 'Bool'
+  required: true
+  help: 'Create the probability matrix'
+  default: true
+apptainer_library:
+  type: 'Path'
+  mode: 'r'
+  required: false
+  help: 'Absolute path to Apptainer library directory'
+apptainer_cache:
+  type: 'Path'
+  mode: 'w'
+  required: false
+  help: 'Absolute path to Apptainer cache directory'
+singularity_library:
+  type: 'Path'
+  mode: 'r'
+  required: false
+  help: 'Absolute path to Singularity library directory'
+singularity_cache:
+  type: 'Path'
+  mode: 'w'
+  required: false
+  help: 'Absolute path to Singularity cache directory'
+output_dir:
+  type: 'Path'
+  mode: 'w'
+  required: true
+  help: 'Absolute path to output directory'
+base_resource_update:
+  type: 'ResourceUpdateNamespace'
+  required: false
+  help: 'User-defined modifications for adjusting base resource allocations for processes'
+  elements:
+    memory:
+      type: 'ResourceUpdateList'
+      required: false
+      help: 'List of memory updates'
+    cpus:
+      type: 'ResourceUpdateList'
+      required: false
+      help: 'List of CPU updates'
+input:
+  type: 'InputNamespace'
+  required: true
+  help: 'Input samples'
+  elements:
+    BAM:
+      type: 'InputBAMNamespace'
+      required: true
+      help: 'Input BAMs for somatic structural variant calling'
+      elements:
+        normal:
+          type: 'BAMEntryList'
+          required: false
+          help: 'Input normal BAMs'
+        tumor:
+          type: 'BAMEntryList'
+          required: false
+          help: 'Input tumor BAMs'
