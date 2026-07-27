@@ -3,6 +3,7 @@ nextflow.enable.dsl=2
 include { call_SubclonalCopyNumber_Battenberg } from "./call_SubclonalCopyNumber_Battenberg"
 include { suggest_refit_Battenberg } from "./suggest_refit_Battenberg"
 include { workflow_plot_BAFLogR } from "./workflow-plot-BPG"
+include { prepare_CNASignaturesInput_Battenberg } from "./prepare_CNASignaturesInput_Battenberg"
 include { generate_checksum_PipeVal as generate_sha512_Battenberg } from "../external/pipeline-Nextflow-module/modules/PipeVal/generate-checksum/main.nf"
 
 workflow workflow_battenberg {
@@ -37,6 +38,13 @@ workflow workflow_battenberg {
         call_SubclonalCopyNumber_Battenberg.out.tumor_normal_baf_logr_files,
         input_ch_script,
         input_ch_reference_dict
+    )
+
+    prepare_CNASignaturesInput_Battenberg(
+        META,
+        params.sample,
+        call_SubclonalCopyNumber_Battenberg.out.subclones_cna,
+        input_ch_script
     )
 
     checksum_meta = META.map{ base_m ->
