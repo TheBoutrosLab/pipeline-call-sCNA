@@ -1,6 +1,7 @@
 nextflow.enable.dsl=2
 
 include { call_SubclonalCopyNumber_Battenberg } from "./call_SubclonalCopyNumber_Battenberg"
+include { suggest_refit_Battenberg } from "./suggest_refit_Battenberg"
 include { generate_checksum_PipeVal as generate_sha512_Battenberg } from "../external/pipeline-Nextflow-module/modules/PipeVal/generate-checksum/main.nf"
 
 workflow workflow_battenberg {
@@ -9,12 +10,23 @@ workflow workflow_battenberg {
     paired_input_channel
 
     main:
-    sample_sex_ch = Channel.value(params.sample_sex)
-
     call_SubclonalCopyNumber_Battenberg(
         META,
-        sample_sex_ch,
+        params.sample_sex,
         paired_input_channel
+    )
+
+    input_ch_script = Channel.fromPath("${projectDir}/script", checkIfExists: true)
+
+    suggest_refit_Battenberg(
+        META,
+        call_SubclonalCopyNumber_Battenberg.out.subclones_cna,
+        call_SubclonalCopyNumber_Battenberg.out.default_refit_suggestion,
+        params.sample,
+        params.min_rho,
+        params.min_psi,
+        params.max_psi,
+        input_ch_script
     )
 
     checksum_meta = META.map{ base_m ->
@@ -32,4 +44,5 @@ workflow workflow_battenberg {
     subclones_cna = call_SubclonalCopyNumber_Battenberg.out.subclones_cna
     default_refit_suggestion = call_SubclonalCopyNumber_Battenberg.out.default_refit_suggestion
     tumor_normal_baf_logr_files = call_SubclonalCopyNumber_Battenberg.out.tumor_normal_baf_logr_files
+    custom_refit_suggestion = suggest_refit_Battenberg.out.custom_refit_suggestion
 }
