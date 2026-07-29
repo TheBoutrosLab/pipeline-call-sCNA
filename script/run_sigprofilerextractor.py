@@ -178,7 +178,7 @@ parser.add_argument(
 parser.add_argument(
     '--cosmic-version',
     type=float,
-    default='3.4',
+    default=3.4,
     help='Defines the version of the COSMIC reference signatures'
     )
 parser.add_argument(
