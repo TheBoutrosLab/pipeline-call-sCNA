@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Outputs - pipeline-call-sCNA</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/version-select.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Outputs";
+        var mkdocs_page_input_path = "outputs.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> pipeline-call-sCNA
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../overview/">Overview</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../how-to-run/">How to run</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../flow-diagram/">Flow diagram</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../pipeline-steps/">Pipeline steps</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../inputs/">Inputs</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../configuration/">Configuration</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Outputs</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#cnv_facets-outputs">CNV_FACETS outputs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#battenberg-outputs">Battenberg outputs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#qc-and-cna-signature-outputs">QC and CNA-signature outputs</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../profiles/">Profiles</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../references/">References</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../discussions/">Discussions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../contributors/">Contributors</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../license/">License</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">pipeline-call-sCNA</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Outputs</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/TheBoutrosLab/pipeline-call-sCNA/blob/ebf44e4b65c3388feca48a96003766269a28461c/README.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="outputs">Outputs</h2>
+<p>Results are written below:</p>
+<pre><code class="language-text">&lt;output_dir&gt;/call-sCNA-&lt;pipeline_version&gt;/&lt;tumour_id&gt;/
+├── CNV_FACETS-&lt;version&gt;/
+│   └── output/
+├── Battenberg-&lt;version&gt;/
+│   ├── output/
+│   └── QC/
+├── validation/
+└── log-call-sCNA-&lt;version&gt;-&lt;timestamp&gt;/
+</code></pre>
+<h3 id="cnv_facets-outputs">CNV_FACETS outputs</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Output</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>*.vcf.gz</code> and <code>*.vcf.gz.tbi</code></td>
+<td style="text-align: left;">Allele-specific sCNA calls and tabix index.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*.csv.gz</code></td>
+<td style="text-align: left;">Per-SNP allele counts.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*.cnv.png</code></td>
+<td style="text-align: left;">Genome-wide copy-number plot.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*.spider.pdf</code></td>
+<td style="text-align: left;">Diagnostic purity/ploidy fit plot.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*.sha512</code></td>
+<td style="text-align: left;">SHA-512 checksum for the primary VCF and index.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="battenberg-outputs">Battenberg outputs</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Output</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>*_subclones.txt</code></td>
+<td style="text-align: left;">Clonal and subclonal copy-number profile.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*_rho_and_psi.txt</code></td>
+<td style="text-align: left;">Purity and ploidy estimates.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*_refit_suggestion.txt</code></td>
+<td style="text-align: left;">Battenberg's default refit suggestion.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*_custom_refit_suggestion.txt</code></td>
+<td style="text-align: left;">Optional refit suggestion constrained by the configured ranges.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*.tab</code></td>
+<td style="text-align: left;">Tumour and normal BAF/log R data.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*.png</code></td>
+<td style="text-align: left;">Battenberg diagnostic and copy-number plots.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*.sha512</code></td>
+<td style="text-align: left;">SHA-512 checksum for the primary subclones file.</td>
+</tr>
+</tbody>
+</table>
+<p>See the <a href="https://github.com/Wedge-lab/battenberg#description-of-the-output">Battenberg output documentation</a> for details.</p>
+<h3 id="qc-and-cna-signature-outputs">QC and CNA-signature outputs</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Output</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>*BAF*.png</code>, <code>*LogR*.png</code></td>
+<td style="text-align: left;">Per-chromosome and genome-wide BAF/log R plots.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*seg_input.txt</code></td>
+<td style="text-align: left;">Battenberg segmentation input prepared for SigProfilerExtractor.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*BATTENBERG.CNV48.matrix.tsv</code></td>
+<td style="text-align: left;">CNV48 count matrix.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*CNV48/</code></td>
+<td style="text-align: left;">SigProfilerExtractor CNA-signature results.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*CosmicTemplates/</code></td>
+<td style="text-align: left;">COSMIC reference templates used during decomposition.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*JOB_METADATA.txt</code></td>
+<td style="text-align: left;">SigProfilerExtractor run metadata.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*Seeds.txt</code></td>
+<td style="text-align: left;">Random seeds used by SigProfilerExtractor.</td>
+</tr>
+</tbody>
+</table>
+<p>Pipeline validation, process logs, parameters, Nextflow trace, timeline, and execution report are stored in the validation and timestamped log directories.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../configuration/" class="btn btn-neutral float-left" title="Configuration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../profiles/" class="btn btn-neutral float-right" title="Profiles">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/TheBoutrosLab/pipeline-call-sCNA" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../configuration/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../profiles/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../js/version-select.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
