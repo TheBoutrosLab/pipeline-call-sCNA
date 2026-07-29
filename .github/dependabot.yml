@@ -1,11 +1,17 @@
 ---
 version: 2
 updates:
-  - package-ecosystem: "pip"
+  - package-ecosystem: "gitsubmodule"
     directory: "/"
     schedule:
       interval: "weekly"
-  - package-ecosystem: "github-actions"
-    directory: "/"
+    groups:
+      # Group the shared Nextflow submodules into one pull request
+      pipeline-submodules:
+        patterns:
+          - "*/pipeline-Nextflow-config"
+          - "*/pipeline-Nextflow-module"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
