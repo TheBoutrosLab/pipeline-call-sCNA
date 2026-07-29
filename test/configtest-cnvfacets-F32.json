@@ -1,6 +1,7 @@
 {
   "nextflow_version": "23.10.0",
   "config": [
+    "test/global.config",
     "test/config/test-cnv_facets.config"
   ],
   "params_file": "test/yaml/a-mini-S2-v1.1.5.yaml",
@@ -14,12 +15,21 @@
   },
   "mocks": {
     "check_path": "",
-    "parse_bam_header": {
-      "read_group": [
-        {
-          "SM": "34567876"
-        }
-      ]
+    "DYNAMIC|parse_bam_header": {
+      "[\"/hot/data/unregistered/SMC-HET/normal/bams/A-mini/0/output/HG002.N-0.bam\"]": {
+        "read_group": [
+          {
+            "SM": "098765"
+          }
+        ]
+      },
+      "[\"/hot/data/unregistered/SMC-HET/tumours/A-mini/bams/0/output/S2.T-0.bam\"]": {
+        "read_group": [
+          {
+            "SM": "52345245"
+          }
+        ]
+      }
     }
   },
   "dated_fields": [
@@ -38,6 +48,9 @@
     "timeline.file"
   ],
   "expected_result": {
+    "apptainer": {
+      "enabled": false
+    },
     "docker": {
       "all_group_ids": "$(for i in `id --real --groups`; do echo -n \"--group-add=$i \"; done)",
       "enabled": true,
@@ -45,13 +58,13 @@
       "uid_and_gid": "-u $(id -u):$(id -g)"
     },
     "manifest": {
-      "author": "Cyriac Kandoth, Mohammed Faizal Eeman Mootor",
-      "description": "A nextflow pipeline for detecting somatic Copy Number Aberrations (sCNAs), utilizing various algorithms to detect and report sCNAs",
+      "author": "Yash Patel",
+      "description": "A pipeline to call somatic CNAs utilizing Battenberg and CNV_FACETS",
       "name": "call-sCNA",
       "version": "VER.SI.ON"
     },
     "normal_sample": [
-      "34567876"
+      "098765"
     ],
     "params": {
       "algorithm": [
@@ -59,6 +72,36 @@
       ],
       "allow_stability_drop": false,
       "balanced_threshold": "0.51",
+      "base_allocations": {
+        "call_SubclonalCopyNumber_Battenberg": {
+          "cpus": "8",
+          "memory": "56 GB"
+        },
+        "call_cnv_facets": {
+          "cpus": "12",
+          "memory": "64 GB"
+        },
+        "extract_CNASignatures_SigProfilerExtractor": {
+          "cpus": "1",
+          "memory": "12 GB"
+        },
+        "plot_BAFLogR_BPG": {
+          "cpus": "1",
+          "memory": "12 GB"
+        },
+        "prepare_CNASignaturesInput_Battenberg": {
+          "cpus": "1",
+          "memory": "12 GB"
+        },
+        "run_validate_PipeVal|generate_sha512_cnv_facets|generate_sha512_Battenberg": {
+          "cpus": "1",
+          "memory": "1 GB"
+        },
+        "suggest_refit_Battenberg": {
+          "cpus": "1",
+          "memory": "1 GB"
+        }
+      },
       "base_resource_update": {
         "memory": [
           "[call_cnv_facets",
@@ -75,6 +118,7 @@
       "cnv_facets_version": "0.16.0",
       "collapse_to_SBS96": true,
       "combined_stability": "1.0",
+      "container_mount_flag": "-v",
       "context_type": "default",
       "cosmic_version": "3.4",
       "cval": [
@@ -82,24 +126,23 @@
         "150"
       ],
       "dataset_id": "TWGSAMIN000001",
-      "dataset_registry_prefix": "/hot/data",
-      "date": "19970704T165655Z",
       "dbSNP_file": "/hot/resource/tool-specific-input/RecSNV/GRCh38/dbsnp_b150_grch38.vcf.gz",
       "depth": [
         "25",
         "2500"
       ],
-      "docker_container_registry": "ghcr.io/uclahs-cds",
+      "docker_container_registry_theboutroslab": "ghcr.io/theboutroslab",
+      "docker_container_registry_uclahscds": "ghcr.io/uclahs-cds",
       "docker_image_battenberg": "ghcr.io/uclahs-cds/battenberg:2.2.9-bl-parametrize-max-rho",
       "docker_image_bpg": "ghcr.io/uclahs-cds/boutroslabplottinggeneral:7.1.0",
       "docker_image_cnv_facets": "ghcr.io/uclahs-cds/cnv_facets:0.16.0",
-      "docker_image_sigprofilerextractor": "ghcr.io/uclahs-cds/sigprofilerextractor:1.2.1",
+      "docker_image_sigprofilerextractor": "ghcr.io/theboutroslab/sigprofilerextractor:1.2.1",
       "docker_image_validate": "ghcr.io/uclahs-cds/pipeval:4.0.0-rc.2",
       "exome": false,
       "export_probabilities": true,
       "genome_build": "GRCh38",
       "genome_build_dict": {
-        "GRCh37": "hg37",
+        "GRCh37": "hg19",
         "GRCh38": "hg38"
       },
       "get_all_signature_matrices": false,
@@ -114,13 +157,14 @@
           ]
         }
       },
-      "log_output_dir": "/tmp/scna-outputs-3/call-sCNA-VER.SI.ON/34567876/log-call-sCNA-VER.SI.ON-19970704T165655Z",
+      "log_output_dir": "/tmp/scna-outputs-3/call-sCNA-VER.SI.ON/52345245/log-call-sCNA-VER.SI.ON-19970704T165655Z",
       "make_decomposition_plots": true,
       "matrix_normalization": "gmm",
       "max_cpus": "32",
       "max_memory": "64 GB",
       "max_psi": "4.8",
       "max_rho": "1.0",
+      "max_time": "24d 20h 31m 24s",
       "min_base_qual": "20",
       "min_cpus": "1",
       "min_goodness_of_fit": "0.63",
@@ -138,6 +182,7 @@
       "min_psi": "1.6",
       "min_rho": "0.1",
       "min_stability": "0.2",
+      "min_time": "1s",
       "nbhdsnp": "250",
       "nmf_init": "random",
       "nmf_replicates": "100",
@@ -145,77 +190,49 @@
       "nmf_tolerance": "1.0E-15",
       "no_cov_plot": true,
       "output_dir": "/tmp/scna-outputs-3",
-      "output_dir_base": "/tmp/scna-outputs-3/call-sCNA-VER.SI.ON/34567876",
+      "output_dir_base": "/tmp/scna-outputs-3/call-sCNA-VER.SI.ON/52345245",
       "patient_id": "TWGSAMIN000001",
       "pipeval_version": "4.0.0-rc.2",
       "position_scale": "genome-position",
       "precision": "single",
-      "proc_resource_params": {
-        "call_cnv_facets": {
-          "cpus": "12",
-          "memory": "64 GB"
+      "reference_dict": "/hot/resource/reference-genome/GRCh38-BI-20160721/Homo_sapiens_assembly38.dict",
+      "resample": true,
+      "retry_information": {
+        "extract_CNASignatures_SigProfilerExtractor": {
+          "memory": {
+            "operand": "6 GB",
+            "strategy": "add"
+          }
         },
         "plot_BAFLogR_BPG": {
-          "cpus": "1",
-          "memory": "12 GB",
-          "retry_strategy": {
-            "memory": {
-              "operand": "6 GB",
-              "strategy": "add"
-            }
+          "memory": {
+            "operand": "6 GB",
+            "strategy": "add"
           }
         },
         "prepare_CNASignaturesInput_Battenberg": {
-          "cpus": "1",
-          "memory": "12 GB",
-          "retry_strategy": {
-            "memory": {
-              "operand": "6 GB",
-              "strategy": "add"
-            }
+          "memory": {
+            "operand": "6 GB",
+            "strategy": "add"
           }
-        },
-        "run_Battenberg": {
-          "cpus": "8",
-          "memory": "56 GB"
-        },
-        "run_SigProfilerExtractor": {
-          "cpus": "1",
-          "memory": "12 GB",
-          "retry_strategy": {
-            "memory": {
-              "operand": "6 GB",
-              "strategy": "add"
-            }
-          }
-        },
-        "run_validate_PipeVal": {
-          "cpus": "1",
-          "memory": "1 GB"
         },
         "suggest_refit_Battenberg": {
-          "cpus": "1",
-          "memory": "1 GB",
-          "retry_strategy": {
-            "memory": {
-              "operand": "2",
-              "strategy": "exponential"
-            }
+          "memory": {
+            "operand": "2",
+            "strategy": "exponential"
           }
         }
       },
-      "reference_dict": "/hot/resource/reference-genome/GRCh38-BI-20160721/Homo_sapiens_assembly38.dict",
-      "resample": true,
       "rnd_seed": "0",
-      "sample": "34567876",
+      "sample": "52345245",
       "sample_sex": "male",
       "samples_to_process": [
         {
-          "id": "34567876",
+          "id": "098765",
           "path": "/hot/data/unregistered/SMC-HET/normal/bams/A-mini/0/output/HG002.N-0.bam",
           "sample_type": "normal"
         },
-        "{id=34567876, path=/hot/data/unregistered/SMC-HET/tumours/A-mini/bams/0/output/S2.T-0.bam, sample_type=tumor}"
+        "{id=52345245, path=/hot/data/unregistered/SMC-HET/tumours/A-mini/bams/0/output/S2.T-0.bam, sample_type=tumor}"
       ],
       "save_intermediate_files": false,
       "seeds": "random",
@@ -224,11 +241,11 @@
       "snp_count_orphans": true,
       "snp_mapq": "1",
       "stability": "0.8",
-      "target_bed": "/scratch/46892047/NO_FILE.bed",
-      "ucla_cds": true,
+      "target_bed": "/mnt/pipeline/work/NO_FILE.bed",
+      "ucla_cds": false,
       "use_target_bed": false,
       "verbose": false,
-      "work_dir": "/scratch/46892047"
+      "work_dir": "/mnt/pipeline/work"
     },
     "process": {
       "afterScript": {
@@ -237,7 +254,7 @@
         "3": "",
         "closure": ""
       },
-      "cache": false,
+      "cache": true,
       "commonRetryCodes": [
         "104",
         "134",
@@ -258,7 +275,7 @@
         "3": "3",
         "closure": "closure()"
       },
-      "echo": false,
+      "debug": false,
       "errorStrategy": {
         "1": "terminate",
         "2": "terminate",
@@ -282,12 +299,7 @@
         }
       },
       "maxRetries": "1",
-      "memory": {
-        "1": "3 GB",
-        "2": "6 GB",
-        "3": "9 GB",
-        "closure": "closure()"
-      },
+      "memory": "64 GB",
       "withLabel:process_high": {
         "cpus": {
           "1": "12",
@@ -330,9 +342,22 @@
           "closure": "closure()"
         }
       },
+      "withName:call_SubclonalCopyNumber_Battenberg": {
+        "cpus": "8",
+        "memory": "56 GB"
+      },
       "withName:call_cnv_facets": {
         "cpus": "12",
         "memory": "64 GB"
+      },
+      "withName:extract_CNASignatures_SigProfilerExtractor": {
+        "cpus": "1",
+        "memory": {
+          "1": "12 GB",
+          "2": "18 GB",
+          "3": "24 GB",
+          "closure": "retry_updater(12 GB, add, 6 GB, $task.attempt, memory)"
+        }
       },
       "withName:plot_BAFLogR_BPG": {
         "cpus": "1",
@@ -352,20 +377,7 @@
           "closure": "retry_updater(12 GB, add, 6 GB, $task.attempt, memory)"
         }
       },
-      "withName:run_Battenberg": {
-        "cpus": "8",
-        "memory": "56 GB"
-      },
-      "withName:run_SigProfilerExtractor": {
-        "cpus": "1",
-        "memory": {
-          "1": "12 GB",
-          "2": "18 GB",
-          "3": "24 GB",
-          "closure": "retry_updater(12 GB, add, 6 GB, $task.attempt, memory)"
-        }
-      },
-      "withName:run_validate_PipeVal": {
+      "withName:run_validate_PipeVal|generate_sha512_cnv_facets|generate_sha512_Battenberg": {
         "cpus": "1",
         "memory": "1 GB"
       },
@@ -381,20 +393,28 @@
     },
     "report": {
       "enabled": true,
-      "file": "/tmp/scna-outputs-3/call-sCNA-VER.SI.ON/34567876/log-call-sCNA-VER.SI.ON-19970704T165655Z/nextflow-log/report.html"
+      "file": "/tmp/scna-outputs-3/call-sCNA-VER.SI.ON/52345245/log-call-sCNA-VER.SI.ON-19970704T165655Z/nextflow-log/report.html"
+    },
+    "resource_handler": {
+      "handle_resources": "closure()",
+      "set_resource_limit_params": "closure()",
+      "set_retry": "closure()",
+      "setup_retry": "closure()"
+    },
+    "singularity": {
+      "enabled": false
     },
     "timeline": {
       "enabled": true,
-      "file": "/tmp/scna-outputs-3/call-sCNA-VER.SI.ON/34567876/log-call-sCNA-VER.SI.ON-19970704T165655Z/nextflow-log/timeline.html"
+      "file": "/tmp/scna-outputs-3/call-sCNA-VER.SI.ON/52345245/log-call-sCNA-VER.SI.ON-19970704T165655Z/nextflow-log/timeline.html"
     },
     "trace": {
       "enabled": true,
-      "file": "/tmp/scna-outputs-3/call-sCNA-VER.SI.ON/34567876/log-call-sCNA-VER.SI.ON-19970704T165655Z/nextflow-log/trace.txt"
+      "file": "/tmp/scna-outputs-3/call-sCNA-VER.SI.ON/52345245/log-call-sCNA-VER.SI.ON-19970704T165655Z/nextflow-log/trace.txt"
     },
     "tumor_sample": [
-      "34567876"
+      "52345245"
     ],
-    "tz": "sun.util.calendar.ZoneInfo[id=\"UTC\",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null]",
-    "workDir": "/scratch/46892047"
+    "workDir": "work"
   }
 }
