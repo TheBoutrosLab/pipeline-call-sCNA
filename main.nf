@@ -5,6 +5,7 @@ nextflow.enable.dsl=2
 include { run_validate_PipeVal } from './external/pipeline-Nextflow-module/modules/PipeVal/validate/main.nf'
 include { indexFile } from './external/pipeline-Nextflow-module/modules/common/indexFile/main.nf'
 include { workflow_cnv_facets } from './module/workflow-cnv_facets.nf'
+include { workflow_battenberg } from './module/workflow-battenberg.nf'
 
 log.info """\
 =====================================
@@ -101,6 +102,12 @@ workflow {
         ]
     }
 
+    battenberg_meta = base_meta.map{ base_m ->
+        base_m + [
+            'workflow_output_dir': "${base_m.output_dir}/Battenberg-${params.battenberg_version}"
+        ]
+    }
+
     /**
     *   Input validation
     */
@@ -122,6 +129,16 @@ workflow {
             cnv_facets_meta,
             input_ch_paired_bams,
             input_ch_dbSNP_file
+        )
+    }
+
+    /**
+    *   Call somatic copy-number variants with Battenberg
+    */
+    if ('Battenberg' in params.algorithm) {
+        workflow_battenberg(
+            battenberg_meta,
+            input_ch_paired_bams
         )
     }
 }

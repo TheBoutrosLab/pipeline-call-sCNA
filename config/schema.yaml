@@ -45,6 +45,11 @@ position_scale:
   choices:
     - index
     - genome-position
+bpg_plot_resolution:
+  type: 'Integer'
+  required: true
+  default: 200
+  help: 'Resolution in DPI for BAF and LogR plots'
 battenberg_reference:
   type: 'Path'
   mode: 'r'
