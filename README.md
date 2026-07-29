@@ -1,6 +1,6 @@
 # call-sCNA
 
-[![GitHub release](https://img.shields.io/github/v/release/TheBoutrosLab/pipeline-call-sCNA)](https://github.com/TheBoutrosLab/pipeline-call-sCNA/releases)
+[![GitHub release](https://img.shields.io/github/v/release/theboutroslab/pipeline-call-sCNA)](https://github.com/theboutroslab/pipeline-call-sCNA/actions/workflows/prepare-release.yaml)
 
 - [Overview](#overview)
 - [How to run](#how-to-run)
