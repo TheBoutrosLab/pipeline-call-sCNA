@@ -5,7 +5,7 @@ log.info """\
     P R E P A R E  C N A  S I G N A T U R E S  I N P U T  B A T T E N B E R G
 ---------------------------------------------------------------------------------
 Docker Images:
-- docker_image_sigprofilerextractor: ${params.docker_image_sigprofilerextractor}
+- docker_image_bpg: ${params.docker_image_bpg}
 """
 
 include { generate_standard_filename; sanitize_string } from '../external/pipeline-Nextflow-module/modules/common/generate_standardized_filename/main.nf'
@@ -14,7 +14,7 @@ include { generate_standard_filename; sanitize_string } from '../external/pipeli
 * Prepare Battenberg subclonal copy-number output for CNA signature extraction.
 */
 process prepare_CNASignaturesInput_Battenberg {
-    container params.docker_image_sigprofilerextractor
+    container params.docker_image_bpg
 
     tag "${tumor_id}"
 
