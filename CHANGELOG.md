@@ -8,8 +8,6 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [1.0.0] - 2026-07-29
 
-## [1.0.0] - 2026-07-29
-
 ### Added
 
 - Add `FACETS` workflow
