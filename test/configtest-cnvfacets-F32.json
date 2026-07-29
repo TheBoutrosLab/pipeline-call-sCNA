@@ -241,11 +241,11 @@
       "snp_count_orphans": true,
       "snp_mapq": "1",
       "stability": "0.8",
-      "target_bed": "/mnt/pipeline/work/NO_FILE.bed",
+      "target_bed": "/home/runner/work/pipeline-call-sCNA/pipeline-call-sCNA/work/NO_FILE.bed",
       "ucla_cds": false,
       "use_target_bed": false,
       "verbose": false,
-      "work_dir": "/mnt/pipeline/work"
+      "work_dir": "/home/runner/work/pipeline-call-sCNA/pipeline-call-sCNA/work"
     },
     "process": {
       "afterScript": {
