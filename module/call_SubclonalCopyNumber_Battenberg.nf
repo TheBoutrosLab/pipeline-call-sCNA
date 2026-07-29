@@ -55,7 +55,18 @@ process call_SubclonalCopyNumber_Battenberg {
     """
     set -euo pipefail
 
-    Rscript /usr/local/lib/R/site-library/Battenberg/example/battenberg_wgs.R \
+    cp /usr/local/lib/R/site-library/Battenberg/example/battenberg_wgs.R ./battenberg_wgs.R
+
+    sed -i \
+        -e "s|^IMPUTEINFOFILE <- .*|IMPUTEINFOFILE <- '/opt/battenberg_reference/impute_info.txt';|" \
+        -e "s|^G1000PREFIX <- .*|G1000PREFIX <- '/opt/battenberg_reference/1000G_loci_hg38/1kg.phase3.v5a_GRCh38nounref_allele_index_chr';|" \
+        -e "s|^G1000PREFIX[.]AC <- .*|G1000PREFIX.AC <- '/opt/battenberg_reference/1000G_loci_hg38/1kg.phase3.v5a_GRCh38nounref_loci_chr';|" \
+        -e "s|^GCCORRECTPREFIX <- .*|GCCORRECTPREFIX <- '/opt/battenberg_reference/GC_correction_hg38/1000G_GC_chr';|" \
+        -e "s|^REPLICCORRECTPREFIX <- .*|REPLICCORRECTPREFIX <- '/opt/battenberg_reference/RT_correction_hg38/1000G_RT_chr';|" \
+        -e "s|^PROBLEMLOCI <- .*|PROBLEMLOCI <- '/opt/battenberg_reference/probloci/probloci.txt.gz';|" \
+        ./battenberg_wgs.R
+
+    Rscript ./battenberg_wgs.R \
         -t ${tumor_id} \
         -n ${normal_id} \
         --tb `readlink -f ${tumor_bam}` \
