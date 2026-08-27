@@ -4,3 +4,6 @@
 [submodule "external/pipeline-Nextflow-config"]
 	path = external/pipeline-Nextflow-config
 	url = git@github.com:TheBoutrosLab/pipeline-Nextflow-config.git
+[submodule "lib"]
+	path = lib
+	url = git@github.com:TheBoutrosLab/pipeline-Nextflow-lib.git
