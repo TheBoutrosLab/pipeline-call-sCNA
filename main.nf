@@ -141,4 +141,8 @@ workflow {
             input_ch_paired_bams
         )
     }
+
+    workflow.onComplete = {
+        WorkflowFinalizer.completeWorkflow(workflow, params);
+    }
 }
