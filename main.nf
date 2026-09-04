@@ -24,7 +24,7 @@ Current Configuration:
         genome build: ${params.genome_build}
         target regions: ${params.target_bed}
         algorithms: ${params.algorithm}
-        sample_sex: "${params.sample_sex}"
+        genetic_sex: "${params.genetic_sex}"
         battenberg_reference: "${params.battenberg_reference}"
         dbSNP_file: "${params.dbSNP_file}"
         reference_dict: "${params.reference_dict}"

@@ -7,13 +7,13 @@ patient_id:
   type: 'String'
   required: true
   help: 'Patient identifier'
-sample_sex:
+genetic_sex:
   type: 'String'
   required: true
-  help: 'Sex of the sample, either male or female'
+  help: 'Genetic sex of the sample, either XY or XX'
   choices:
-    - male
-    - female
+    - XY
+    - XX
 genome_build:
   type: 'String'
   required: true

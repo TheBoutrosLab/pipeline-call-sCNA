@@ -126,7 +126,7 @@ The complete example is in [config/template.config](config/template.config), and
 
 | Parameter | Type | Required | Description |
 |:----------|:-----|:---------|:------------|
-| `sample_sex` | string | yes | `male` or `female`. |
+| `genetic_sex` | string | yes | `XY` or `XX`; translated to Battenberg's `male` or `female` value, respectively. |
 | `battenberg_reference` | path | yes | Battenberg reference-bundle directory mounted inside the Battenberg container. |
 | `min_rho` | number | yes | Minimum tumour purity. Default: `0.1`. |
 | `max_rho` | number | yes | Maximum tumour purity. Default: `1.0`. |

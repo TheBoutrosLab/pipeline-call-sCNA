@@ -225,7 +225,7 @@
       },
       "rnd_seed": "0",
       "sample": "52345245",
-      "sample_sex": "male",
+      "genetic_sex": "XY",
       "samples_to_process": [
         {
           "id": "098765",
