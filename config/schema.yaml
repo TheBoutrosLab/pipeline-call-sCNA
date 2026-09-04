@@ -7,7 +7,7 @@ patient_id:
   type: 'String'
   required: true
   help: 'Patient identifier'
-sample_sex:
+genetic_sex:
   type: 'String'
   required: true
   help: 'Sex of the sample, either male or female'
