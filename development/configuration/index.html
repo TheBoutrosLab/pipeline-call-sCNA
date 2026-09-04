@@ -118,7 +118,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
       <li class="breadcrumb-item active">Configuration</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/TheBoutrosLab/pipeline-call-sCNA/blob/0e7995c73ec9760a5973aa54bacf72474c3d0c89/README.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/TheBoutrosLab/pipeline-call-sCNA/blob/f21c6669a436a3fdaa46571d09d0e9c0b02b1d73/README.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -127,7 +127,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="configuration">Configuration</h2>
-<p>The complete example is in <a href="https://github.com/TheBoutrosLab/pipeline-call-sCNA/blob/0e7995c73ec9760a5973aa54bacf72474c3d0c89/config/template.config">config/template.config</a>, and validation rules are defined in <a href="https://github.com/TheBoutrosLab/pipeline-call-sCNA/blob/0e7995c73ec9760a5973aa54bacf72474c3d0c89/config/schema.yaml">config/schema.yaml</a>.</p>
+<p>The complete example is in <a href="https://github.com/TheBoutrosLab/pipeline-call-sCNA/blob/f21c6669a436a3fdaa46571d09d0e9c0b02b1d73/config/template.config">config/template.config</a>, and validation rules are defined in <a href="https://github.com/TheBoutrosLab/pipeline-call-sCNA/blob/f21c6669a436a3fdaa46571d09d0e9c0b02b1d73/config/schema.yaml">config/schema.yaml</a>.</p>
 <h3 id="general-configuration">General configuration</h3>
 <table>
 <thead>
@@ -219,10 +219,10 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>sample_sex</code></td>
+<td style="text-align: left;"><code>genetic_sex</code></td>
 <td style="text-align: left;">string</td>
 <td style="text-align: left;">yes</td>
-<td style="text-align: left;"><code>male</code> or <code>female</code>.</td>
+<td style="text-align: left;"><code>XY</code> or <code>XX</code>; translated to Battenberg's <code>male</code> or <code>female</code> value, respectively.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>battenberg_reference</code></td>
@@ -536,7 +536,7 @@
 </tbody>
 </table>
 <h3 id="resource-overrides">Resource overrides</h3>
-<p>Default process resources are defined in <a href="https://github.com/TheBoutrosLab/pipeline-call-sCNA/blob/0e7995c73ec9760a5973aa54bacf72474c3d0c89/config/resources.json">config/resources.json</a>. Use <code>base_resource_update</code> to multiply the memory or CPU allocation for selected processes:</p>
+<p>Default process resources are defined in <a href="https://github.com/TheBoutrosLab/pipeline-call-sCNA/blob/f21c6669a436a3fdaa46571d09d0e9c0b02b1d73/config/resources.json">config/resources.json</a>. Use <code>base_resource_update</code> to multiply the memory or CPU allocation for selected processes:</p>
 <pre><code class="language-nextflow">base_resource_update {
     memory = [
         [[], 2],
