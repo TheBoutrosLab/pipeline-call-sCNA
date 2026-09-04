@@ -13,9 +13,14 @@ workflow workflow_battenberg {
     paired_input_channel
 
     main:
+    String battenberg_sex = [
+        'XY': 'male',
+        'XX': 'female'
+    ][params.genetic_sex]
+
     call_SubclonalCopyNumber_Battenberg(
         META,
-        params.genetic_sex,
+        battenberg_sex,
         paired_input_channel
     )
 

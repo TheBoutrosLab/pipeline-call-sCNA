@@ -32,7 +32,7 @@ process call_SubclonalCopyNumber_Battenberg {
 
     input:
         val(META)
-        val(genetic_sex)
+        val(battenberg_sex)
         tuple val(tumor_id), path(tumor_bam), path(tumor_bam_index), \
             val(normal_id), path(normal_bam), path(normal_bam_index)
 
@@ -72,7 +72,7 @@ process call_SubclonalCopyNumber_Battenberg {
         --tb `readlink -f ${tumor_bam}` \
         --nb `readlink -f ${normal_bam}` \
         -o ./ \
-        --sex ${genetic_sex} \
+        --sex ${battenberg_sex} \
         --cpu ${task.cpus} \
         --min_rho ${params.min_rho} \
         --max_rho ${params.max_rho} \
