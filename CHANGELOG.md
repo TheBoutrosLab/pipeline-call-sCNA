@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- Rename `sample_sex` to more generic `genetic_sex`
+- Update allowed values of `genetic_sex` param to `XY` and `XX` rather than `male` and `female`
+
 ## [1.1.0] - 2026-08-28
 
 ### Changed
