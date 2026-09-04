@@ -10,10 +10,10 @@ patient_id:
 genetic_sex:
   type: 'String'
   required: true
-  help: 'Sex of the sample, either male or female'
+  help: 'Genetic sex of the sample, either XY or XX'
   choices:
-    - male
-    - female
+    - XY
+    - XX
 genome_build:
   type: 'String'
   required: true
