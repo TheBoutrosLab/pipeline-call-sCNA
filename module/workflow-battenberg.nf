@@ -15,7 +15,7 @@ workflow workflow_battenberg {
     main:
     call_SubclonalCopyNumber_Battenberg(
         META,
-        params.sample_sex,
+        params.genetic_sex,
         paired_input_channel
     )
 
