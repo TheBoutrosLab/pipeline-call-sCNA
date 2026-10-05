@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [2.0.1] - 2026-10-05
+
+### Changed
+
+- Update module submodule with compatible CRAM validation
+
 ## [2.0.0] - 2026-09-04
 
 ### Changed
@@ -29,3 +37,5 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 [1.0.0]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/releases/tag/v1.0.0
 [1.1.0]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/compare/v1.0.0...v1.1.0
 [2.0.0]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/compare/v1.1.0...v2.0.0
+[2.0.1]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/compare/v2.0.0...v2.0.1
+[unreleased]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/compare/v2.0.1...HEAD
