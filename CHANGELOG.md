@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+## [2.0.2] - 2026-10-09
+
 ### Changed
 
 - Update config submodule to fix task property access
@@ -42,4 +44,5 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 [1.1.0]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/compare/v1.0.0...v1.1.0
 [2.0.0]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/compare/v1.1.0...v2.0.0
 [2.0.1]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/compare/v2.0.0...v2.0.1
-[unreleased]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/compare/v2.0.1...HEAD
+[2.0.2]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/compare/v2.0.1...v2.0.2
+[unreleased]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/compare/v2.0.2...HEAD
