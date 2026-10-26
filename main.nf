@@ -102,7 +102,8 @@ workflow {
 
     battenberg_meta = base_meta.map{ base_m ->
         base_m + [
-            'workflow_output_dir': "${base_m.output_dir}/Battenberg-${params.battenberg_version}"
+            'workflow_output_dir': "${base_m.output_dir}/Battenberg-${params.battenberg_version}",
+            'battenberg_reference': params.battenberg_reference
         ]
     }
 

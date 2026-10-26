@@ -15,7 +15,6 @@ include { generate_standard_filename; sanitize_string } from '../external/pipeli
 */
 process call_SubclonalCopyNumber_Battenberg {
     container params.docker_image_battenberg
-    containerOptions "${params.container_mount_flag} ${params.battenberg_reference}:/opt/battenberg_reference/"
 
     tag "${tumor_id}-${normal_id}"
 
@@ -29,7 +28,8 @@ process call_SubclonalCopyNumber_Battenberg {
         },
         failOnError: false
 
-    ext log_dir_suffix: { "-${tumor_id}-${normal_id}" }
+    ext log_dir_suffix: { "-${tumor_id}-${normal_id}" },
+        containerOptions: { "${params.container_mount_flag} ${META.battenberg_reference}:/opt/battenberg_reference/" }
 
     input:
         val(META)
