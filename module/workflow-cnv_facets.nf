@@ -1,5 +1,3 @@
-nextflow.enable.dsl=2
-
 include { call_cnv_facets } from "./cnv_facets"
 include { generate_checksum_PipeVal as generate_sha512_cnv_facets } from "../external/pipeline-Nextflow-module/modules/PipeVal/generate-checksum/main.nf"
 

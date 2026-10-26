@@ -23,7 +23,8 @@ process extract_CNASignatures_SigProfilerExtractor {
         mode: "copy",
         saveAs: {
             "${output_filename}_${sanitize_string(file(it).getName().replace("${tumor_id}_", ""))}"
-        }
+        },
+        failOnError: false
 
     ext log_dir_suffix: { "-${tumor_id}-${cna_caller}" }
 
