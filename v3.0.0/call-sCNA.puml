@@ -1,0 +1,32 @@
+@startuml
+skinparam SwimlaneTitleFontStyle bold
+
+start
+
+:==Input
+---
+Input Matched Tumor/Normal BAMs;
+:==Input Validation
+---
+Validate the input BAMs and corresponding index files;
+
+split
+partition "cnv_facets workflow" {
+    :==cnv_facets
+    ---
+    Call CNAs using cnv_facets;
+    }
+split again
+partition "Battenberg workflow" {
+    :==Battenberg
+    ---
+    Call CNAs using Battenberg;
+    :==Plot BAF/LogR
+    ---
+    Produce publication quality
+    plots for B-Allele Frequency
+    and LogR;
+    }
+end split
+stop
+@enduml
