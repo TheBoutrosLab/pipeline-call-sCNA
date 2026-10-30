@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-10-30
+
 ### Changed
 
 - Update to support Nextflow v25.10.5
@@ -49,4 +51,5 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 [2.0.0]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/compare/v1.1.0...v2.0.0
 [2.0.1]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/compare/v2.0.0...v2.0.1
 [2.0.2]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/compare/v2.0.1...v2.0.2
-[unreleased]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/compare/v2.0.2...HEAD
+[3.0.0]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/compare/v2.0.2...v3.0.0
+[unreleased]: https://github.com/TheBoutrosLab/pipeline-call-sCNA/compare/v3.0.0...HEAD
