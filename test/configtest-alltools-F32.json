@@ -135,6 +135,7 @@
       "docker_image_validate": "ghcr.io/uclahs-cds/pipeval:4.0.0-rc.2",
       "exome": false,
       "export_probabilities": true,
+      "genetic_sex": "XY",
       "genome_build": "GRCh38",
       "genome_build_dict": {
         "GRCh37": "hg19",
@@ -159,7 +160,7 @@
       "max_memory": "64 GB",
       "max_psi": "4.8",
       "max_rho": "1.0",
-      "max_time": "24d 20h 31m 24s",
+      "max_time": "1000d",
       "min_base_qual": "20",
       "min_cpus": "1",
       "min_goodness_of_fit": "0.63",
@@ -220,7 +221,6 @@
       },
       "rnd_seed": "0",
       "sample": "52345245",
-      "genetic_sex": "XY",
       "samples_to_process": [
         {
           "id": "098765",
