@@ -20,7 +20,8 @@ process suggest_refit_Battenberg {
         mode: "copy",
         saveAs: {
             "${output_filename}_${sanitize_string(file(it).getName().replace("${sample_id}_", ""))}"
-        }
+        },
+        failOnError: false
 
     ext log_dir_suffix: { "-${sample_id}" }
 
