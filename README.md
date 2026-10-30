@@ -32,6 +32,8 @@ The pipeline supports local execution and Slurm-based HPC execution using Docker
 
 ## How to run
 
+**Requirements**: Currently supported Nextflow versions: `25.10.5` (requires Java 17 or later)
+
 The pipeline must be run with exactly one tumour BAM and one matched normal BAM. Each BAM must contain a single sample identifier in its read-group `SM` tags, and the two BAMs must have different identifiers.
 
 1. Copy and edit the example [configuration file](config/template.config).

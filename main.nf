@@ -1,7 +1,5 @@
 #!/usr/bin/env nextflow
 
-nextflow.enable.dsl=2
-
 include { run_validate_PipeVal } from './external/pipeline-Nextflow-module/modules/PipeVal/validate/main.nf'
 include { indexFile } from './external/pipeline-Nextflow-module/modules/common/indexFile/main.nf'
 include { workflow_cnv_facets } from './module/workflow-cnv_facets.nf'
@@ -57,7 +55,7 @@ workflow {
     /**
     *   Input channel processing
     */
-    Channel.from(params.samples_to_process)
+    Channel.fromList(params.samples_to_process)
         .map{ sample -> ['index': indexFile(sample.path)] + sample }
         .set{ input_ch_samples_with_index }
 
@@ -104,7 +102,8 @@ workflow {
 
     battenberg_meta = base_meta.map{ base_m ->
         base_m + [
-            'workflow_output_dir': "${base_m.output_dir}/Battenberg-${params.battenberg_version}"
+            'workflow_output_dir': "${base_m.output_dir}/Battenberg-${params.battenberg_version}",
+            'battenberg_reference': params.battenberg_reference
         ]
     }
 

@@ -1,5 +1,3 @@
-nextflow.enable.dsl=2
-
 include { plot_BAFLogR_BPG } from './bpg_baf_logr.nf'
 
 def isSampleTypeFile(file, sampletype) {

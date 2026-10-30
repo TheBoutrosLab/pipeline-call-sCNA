@@ -1,5 +1,3 @@
-nextflow.enable.dsl=2
-
 include { call_SubclonalCopyNumber_Battenberg } from "./call_SubclonalCopyNumber_Battenberg"
 include { suggest_refit_Battenberg } from "./suggest_refit_Battenberg"
 include { workflow_plot_BAFLogR } from "./workflow-plot-BPG"

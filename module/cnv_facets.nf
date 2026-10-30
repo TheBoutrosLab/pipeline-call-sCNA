@@ -20,7 +20,8 @@ process call_cnv_facets {
 
     publishDir "${META.workflow_output_dir}/output",
         pattern: "${output_filename}.*",
-        mode: "copy"
+        mode: "copy",
+        failOnError: false
 
     ext log_dir_suffix: { "-${tumor_id}-${normal_id}" }
 
